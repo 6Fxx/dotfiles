@@ -71,15 +71,16 @@ if [ -x /usr/bin/dircolors ]; then
 
     if command -v eza >/dev/null 2>&1; then
         alias ls='eza --color=auto --icons'
+		alias ll='ls -lg'¬
+		alias la='ls -A'¬
+ 		alias lt='ls -lhTL1 --no-permissions --no-user'¬
+ 		alias ltt='ls -lhTL2 --no-permissions --no-user'¬
     else
         alias ls='ls --color=auto'
+		alias ll='ls -l'
+		alias la='ls -A'
+    	#alias l='ls -CF'
     fi
-
-    alias ll='ls -lg'
-    alias la='ls -A'
-    alias lt='ls -lhTL1 --no-permissions --no-user'
-    alias ltt='ls -lhTL2 --no-permissions --no-user'
-    #alias l='ls -CF'
 
     alias vi='vim'
     alias nano='nano -l'
@@ -88,15 +89,15 @@ if [ -x /usr/bin/dircolors ]; then
 
 	alias dotfiles='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 
-    #alias hx='helix'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+
+	#alias hx='helix'
     #alias emacs='emacs -nw'
     #alias ls='ls --color=auto'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
-
-    #alias grep='grep --color=auto'
-    #alias fgrep='fgrep --color=auto'
-    #alias egrep='egrep --color=auto'
 fi
 
 # colored GCC warnings and errors
