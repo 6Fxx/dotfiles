@@ -1,7 +1,7 @@
 # ~/.bashrc
 
 # Cle API Perplexity
-export PERPLEXITY_API_KEY=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
+#export PERPLEXITY_API_KEY=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
 
 # Force le terminal couleur (evite les soucis avec Ghostty)
 export TERM=xterm-256color
