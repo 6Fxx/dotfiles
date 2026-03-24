@@ -1,23 +1,26 @@
-# ~/.bashrc
+ #~/.bashrc
 
 # Cle API Perplexity
-#export PERPLEXITY_API_KEY=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
+#export PERPLEXITY_API_KEY=pplx-
 
 # Force le terminal couleur (evite les soucis avec Ghostty)
 export TERM=xterm-256color
 
-#definition de la langue
+# Definition de la langue
 export LANG=fr_FR.UTF-8
 #export LANG=en_US.UTF-8
 
 #Langue Systeme
 #LC_MESSAGES=en_US.UTF
 
-#Auto completion via sudo
+# PATH
+export PATH=$PATH:/home/francis/Scripts:~/.local/share/kyrat/bin
+
+# Auto completion via sudo
 complete -cf sudo
 
-#PATH
-export PATH=$PATH:/home/francis/Scripts:~/.local/share/kyrat/bin
+# Integration shell de fzf
+#eval "$(fzf --bash)"
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
