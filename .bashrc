@@ -20,7 +20,7 @@ export PATH=$PATH:/home/francis/Scripts:~/.local/share/kyrat/bin
 complete -cf sudo
 
 # Integration shell de fzf
-#eval "$(fzf --bash)"
+eval "$(fzf --bash)"
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
