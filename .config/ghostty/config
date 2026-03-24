@@ -1,0 +1,158 @@
+# This is the configuration file for Ghostty.
+#
+# This template file has been automatically created at the following
+# path since Ghostty couldn't find any existing config files on your system:
+#
+#   /home/francis/.config/ghostty/config
+#
+# The template does not set any default options, since Ghostty ships
+# with sensible defaults for all options. Users should only need to set
+# options that they want to change from the default.
+#
+# Run `ghostty +show-config --default --docs` to view a list of
+# all available config options and their default values.
+#
+# Additionally, each config option is also explained in detail
+# on Ghostty's website, at https://ghostty.org/docs/config.
+#
+# Ghostty can reload the configuration while running by using the menu
+# options or the bound key (default: Command + Shift + comma on macOS and
+# Control + Shift + comma on other platforms). Not all config options can be
+# reloaded while running; some only apply to new windows and others may require
+# a full restart to take effect.
+
+# Config syntax crash course
+# ==========================
+# # The config file consists of simple key-value pairs,
+# # separated by equals signs.
+# font-family = Iosevka
+# window-padding-x = 2
+#
+# # Spacing around the equals sign does not matter.
+# # All of these are identical:
+# key=value
+# key= value
+# key =value
+# key = value
+#
+# # Any line beginning with a # is a comment. It's not possible to put
+# # a comment after a config option, since it would be interpreted as a
+# # part of the value. For example, this will have a value of "#123abc":
+# background = #123abc
+#
+# # Empty values are used to reset config keys to default.
+# key =
+#
+# # Some config options have unique syntaxes for their value,
+# # which is explained in the docs for that config option.
+# # Just for example:
+# resize-overlay-duration = 4s 200ms
+
+### THEMES ###
+
+# theme = "0x96f"
+# theme = Adwaita Dark
+#theme = "GitHub Dark"
+theme = "One Dark Two"
+
+### Taille
+# Largeur en nombre de colonnes (caractères)
+window-width = 100
+
+# Hauteur en nombre de lignes
+window-height = 25
+
+### Transparence et flou ###
+
+# background-opacity = 0.95
+# background-blur-radius = 20
+
+### Police ###
+
+# font-family = "JetBrains Mono"
+# font-size = 13
+
+# Active les ligatures (ex: => devient une flèche)
+# font-feature = calt
+font-feature = -calt
+
+### Curseur ###
+
+cursor-style = block
+cursor-style-blink = true
+
+### Decoration ###
+
+# Enlève la barre de titre
+# window-decoration = false
+# Affiche les barres de defilement
+#scrollbar = system
+
+### Padding (Marges) ###
+
+window-padding-x = 10
+window-padding-y = 10
+window-padding-balance = true
+
+# Permet de redimensionner librement sans "sauter" par ligne de caractère
+resize-overlay = never
+
+### Shell et Commandes ###
+
+# Lancer une commande spécifique au démarrage (ex: pwsh)
+# command = /usr/bin/pwsh
+
+# Environnement spécifique (utile pour vos scripts Python/Bash)
+# env = PATH=/opt/custom/bin:$PATH
+
+### Raccourcis Clavier (Keybindings) ###
+
+# Recharger la configuration sans redémarrer
+keybind = ctrl+shift+r=reload_config
+
+# Gestion du presse-papier (si différent du défaut)
+keybind = ctrl+shift+c=copy_to_clipboard
+keybind = ctrl+shift+v=paste_from_clipboard
+
+# Ouvrir une nouvelle fenêtre/onglet
+keybind = ctrl+shift+n=new_window
+keybind = ctrl+shift+t=new_tab
+
+# Zoom
+keybind = ctrl+plus=increase_font_size:1
+keybind = ctrl+minus=decrease_font_size:1
+
+# Création de splits plus intuitive
+keybind = ctrl+shift+d=new_split:right
+keybind = ctrl+shift+e=new_split:down
+
+# Remise à zéro avec Ctrl+0
+keybind = ctrl+zero=reset_font_size
+
+# Fermeture (attention, ferme l'onglet si c'est le dernier split)
+# keybind = ctrl+shift+x=close_surface
+
+# Navigation type Vim
+# keybind = ctrl+h=goto_split:left
+# keybind = ctrl+j=goto_split:bottom
+# keybind = ctrl+k=goto_split:top
+# keybind = ctrl+l=goto_split:right
+
+### Options Avancées (Sysadmin) ###
+
+# Confirm Close (sessions SSH et le travail à distance)
+# confirm-close-surface = true
+
+# Désactiver si vous avez des problèmes d'affichage sur des vieux serveurs
+# shell-integration = detect
+
+# Copie à la sélection
+#copy-on-select = true
+
+### Intégration SSH
+
+# Transfère automatiquement le fichier terminfo de Ghostty sur le serveur distant
+shell-integration-features = ssh-terminfo
+
+# Force Ghostty à utiliser temporairement la valeur xterm-256color au lieu de son identifiant par défaut
+# shell-integration-features = ssh-env
