@@ -13,9 +13,7 @@ endif
 " VimPlug
 call plug#begin('~/.vim/plugged')
 
-
-" VIMPROC
-Plug 'Shougo/vimproc', { 'do': 'make' }
+" Plug 'Shougo/vimproc', { 'do': 'make' }
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'preservim/vim-indent-guides'
