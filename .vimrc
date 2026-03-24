@@ -16,21 +16,6 @@ call plug#begin('~/.vim/plugged')
 
 " VIMPROC
 Plug 'Shougo/vimproc', { 'do': 'make' }
-
-" Syntastic
-" https://github.com/scrooloose/syntastic
-"Plug 'scrooloose/syntastic'
-
-" Fugitive
-" fugitive.vim: a Git wrapper so awesome, it should be illegal
-" https://github.com/tpope/vim-fugitive
-"Plug 'tpope/vim-fugitive'
-
-" Surround
-" surround.vim: quoting/parenthesizing made simple
-" https://github.com/tpope/vim-surround
-"Plug 'tpope/vim-surround'
-
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'preservim/vim-indent-guides'
