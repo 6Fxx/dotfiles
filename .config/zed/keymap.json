@@ -1,0 +1,65 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  // Renommer un symbole (variable, fonction, etc.) avec Ctrl+Shift+R dans l'éditeur
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-shift-r": "editor::Rename",
+    },
+  },
+
+  // Ouvrir un nouveau terminal avec Ctrl+Shift+T dans le workspace
+  // {
+  //   "context": "Workspace",
+  //   "bindings": {
+  //     "ctrl-shift-t": "workspace::NewTerminal",
+  //   },
+  // },
+
+  // Basculer l'affichage du dock inférieur avec Ctrl+Shift+T dans le workspace
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-shift-t": "workspace::ToggleBottomDock",
+    },
+  },
+
+  // Lancer l'assistance inline de l'IA avec Cmd+K dans l'éditeur (hors éditeur de contexte IA)
+  {
+    "context": "!ContextEditor > (Editor && mode == full)",
+    "bindings": {
+      "cmd-k": "assistant::InlineAssist",
+    },
+  },
+
+  // Activer/désactiver les commentaires avec Cmd+/ sans descendre à la ligne suivante
+  // {
+  //   "context": "Editor",
+  //   "use_key_equivalents": false,
+  //   "bindings": {
+  //     "cmd-/": ["editor::ToggleComments", { "advance_downwards": false }],
+  //   },
+  // },
+
+  // Afficher les suggestions de complétion avec Alt+Échap dans l'éditeur
+  // {
+  //   "context": "Editor",
+  //   "bindings": {
+  //     "alt-escape": "editor::ShowCompletions",
+  //   },
+  // },
+
+  // Basculer le focus sur le panneau Git avec Cmd+Shift+G dans le workspace
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-shift-g": "git_panel::ToggleFocus",
+    },
+  },
+]

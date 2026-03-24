@@ -1,0 +1,146 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  // Restauration de l'espace de travail
+  "restore_on_startup": "last_workspace",
+
+  // Modèle IA utilisé par l'agent Zed
+  "agent": {
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-5-mini",
+      "enable_thinking": false,
+      "effort": "high",
+    },
+    "favorite_models": [],
+    "model_parameters": [],
+  },
+
+  // Mode Vim désactivé
+  "vim_mode": false,
+
+  // Fait confiance à tous les worktrees sans confirmation
+  "session": {
+    "trust_all_worktrees": true,
+  },
+
+  // Apparence et tailles de police
+  "base_keymap": "VSCode",
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+
+  // Thème d'icone
+  "icon_theme": "Material Icon Theme",
+
+  // Thème selon le mode clair/sombre
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "One Dark",
+  },
+
+  // Shell utilisé dans le terminal intégré
+  "terminal": {
+    "shell": {
+      "with_arguments": {
+        "program": "/bin/bash",
+        "args": ["--login"],
+      },
+    },
+  },
+
+  // Affichage des onglets
+  "tabs": {
+    "show_diagnostics": "errors",
+    "file_icons": true,
+    "git_status": true,
+  },
+
+  // Guides d'indentation visuels
+  "indent_guides": {
+    "enabled": true,
+    "coloring": "indent_aware",
+    "line_width": 3,
+    "active_line_width": 5,
+    // "background_coloring": "indent_aware",
+  },
+
+  // Sauvegarde automatique
+  "format_on_save": "on",
+  //"autosave": "on_focus_change",
+
+  // Dossiers et fichiers exclus du scan de l'explorateur
+  "file_scan_exclusions": [
+    "**/.conductor",
+    "**/.git",
+    "**/.svn",
+    "**/.hg",
+    "**/CVS",
+    "**/.DS_Store",
+    "**/Thumbs.db",
+    "**/.classpath",
+    "**/.settings",
+    "**/.access^",
+    // "**/out", // Dossier de sortie de build
+    "**/dist", // Dossier de distribution
+    "**/.husky", // Hooks Git (Husky)
+    "**/.turbo", // Cache Turborepo
+    "**/.vscode-test", // Tests VSCode
+    "**/.vscode", // Configuration VSCode
+    "**/.next", // Build Next.js
+    "**/.storybook", // Configuration Storybook
+    "**/.tap", // Résultats de tests TAP
+    "**/.nyc_output", // Rapports de couverture de code NYC
+    "**/report", // Dossier de rapports
+    "**/node_modules", // Dépendances Node.js
+    "**/out",
+    "**/dist",
+  ],
+
+  // Barre d'onglets
+  "tab_bar": {
+    "show": true,
+    "show_nav_history_buttons": false,
+  },
+
+  // Télémétrie désactivée
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+
+  // Nombre maximum d'onglets ouverts simultanément dans l'éditeur
+  // "max_tabs": 6,
+
+  // Affichage des diagnostics (erreurs, warnings) dans l'éditeur
+  "diagnostics": {
+    "button": true,
+    "include_warnings": true,
+    "inline": {
+      "enabled": true,
+      "update_debounce_ms": 150,
+      "padding": 4,
+      "min_column": 0,
+      "max_severity": null,
+    },
+  },
+
+  // Installation automatique des extensions
+  "auto_install_extensions": {
+    "basher": true,
+    "powershell": true,
+    "github-theme": true,
+    "material-icon-theme": true,
+    "rainbow-csv": true,
+    "csharp": true,
+    "html": true,
+    "docker-compose": true,
+    "dockerfile": true,
+  },
+}
