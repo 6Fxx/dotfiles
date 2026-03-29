@@ -74,10 +74,10 @@ if [ -x /usr/bin/dircolors ]; then
 
     if command -v eza >/dev/null 2>&1; then
         alias ls='eza --color=auto --icons'
-		alias ll='ls -lg'¬
+		alias ll='ls -lg'
 		alias la='ls -a'
- 		alias lt='ls -lhTL1 --no-permissions --no-user'¬
- 		alias ltt='ls -lhTL2 --no-permissions --no-user'¬
+ 		alias lt='ls -lhTL1 --no-permissions --no-user'
+ 		alias ltt='ls -lhTL2 --no-permissions --no-user'
     else
         alias ls='ls --color=auto'
 		alias ll='ls -l'
