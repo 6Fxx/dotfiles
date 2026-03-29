@@ -8,6 +8,11 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   // Restauration de l'espace de travail
+  "agent_servers": {
+    "opencode": {
+      "type": "registry",
+    },
+  },
   "restore_on_startup": "last_workspace",
 
   // Modèle IA utilisé par l'agent Zed
