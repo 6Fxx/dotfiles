@@ -18,10 +18,10 @@
   // Modèle IA utilisé par l'agent Zed
   "agent": {
     "default_model": {
-      "provider": "copilot_chat",
-      "model": "gpt-5-mini",
-      "enable_thinking": false,
       "effort": "high",
+      "provider": "zed.dev",
+      "model": "claude-sonnet-4-6",
+      "enable_thinking": true,
     },
     "favorite_models": [],
     "model_parameters": [],
@@ -50,7 +50,7 @@
     "dark": "One Dark",
   },
 
-  // Shell utilisé dans le terminal intégré
+  // Shell utilisé dans le terminal intégré - Bash -
   "terminal": {
     "shell": {
       "with_arguments": {
@@ -59,6 +59,23 @@
       },
     },
   },
+
+  // Shell utilisé dans le terminal intégré - Powershell 7  -
+  //"terminal": {
+  //  "shell": {
+  //    "with_arguments": {
+  //      "program": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+  //      "args": ["-NoLogo", "-ExecutionPolicy", "Unrestricted"],
+  //    },
+  //  },
+  //},
+
+  // Shell utilisé dans le terminal intégré - Powershell 5.1  -
+  // "terminal": {
+  //    "shell": {
+  //      "program": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+  //    },
+  //  },
 
   // Affichage des onglets
   "tabs": {
