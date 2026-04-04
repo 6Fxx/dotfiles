@@ -19,8 +19,14 @@ export PATH=$PATH:/home/francis/Scripts:~/.local/share/kyrat/bin
 # Auto completion via sudo
 complete -cf sudo
 
+# Definition de l'editeur
+export EDITOR=vim
+
 # Integration shell de fzf
-eval "$(fzf --bash)"
+if command -v fzf >/dev/null 2>&1; then
+    eval "$(fzf --bash)"
+	export FZF_CTRL_T_COMMAND="find . -maxdepth 1 -mindepth 1"
+fi
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
