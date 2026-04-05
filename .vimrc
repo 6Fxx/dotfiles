@@ -3,6 +3,7 @@
 
 if !1 | finish | endif
 
+" ~ Plugin ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " auto-install vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
     echo "Installing VimPlug..."
@@ -28,8 +29,7 @@ call plug#end()
 " Required:
 filetype plugin indent on
 
-"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+" ~ Param Visuel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " Coloration syntaxique
 syntax on
 " colorscheme industry
@@ -64,6 +64,7 @@ let g:indent_guides_enable_on_vim_startup = 1
 " Definition de ctrl+e pour afficher NERDtree
 nnoremap <C-e> :NERDTreeToggle<CR>
 
+" airline
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
@@ -82,6 +83,7 @@ let g:airline_symbols.dirty = '⚡'
 " Activer la détection de filetype (obligatoire)
 filetype plugin on
 
+" ~~~ LSP ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " Activer asyncomplete
 let g:asyncomplete_auto_popup = 1
 
@@ -112,7 +114,7 @@ augroup lsp_install
   autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 
-"~~~~~~~~~~~~~~~~~~~~~~"
+" ~~~ Info ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " Plugins utiles
 "vim-plug /facultatif avec arch
 
