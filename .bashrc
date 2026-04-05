@@ -25,7 +25,7 @@ export EDITOR=vim
 # Integration shell de fzf
 if command -v fzf >/dev/null 2>&1; then
     eval "$(fzf --bash)"
-	export FZF_CTRL_T_COMMAND="find . -maxdepth 1 -mindepth 1"
+    export FZF_CTRL_T_COMMAND="find . -maxdepth 1 -mindepth 1"
 fi
 
 # If not running interactively, don't do anything
@@ -35,7 +35,7 @@ fi
 #### Debut Prompt ####
 
 case "$TERM" in
-	xterm-color|*-256color|xterm-ghostty) color_prompt=yes;;
+    xterm-color|*-256color|xterm-ghostty) color_prompt=yes;;
 esac
 
 PROMPT_ALTERNATIVE=twoline
@@ -80,15 +80,15 @@ if [ -x /usr/bin/dircolors ]; then
 
     if command -v eza >/dev/null 2>&1; then
         alias ls='eza --color=auto --icons'
-		alias ll='ls -lg'
-		alias la='ls -a'
- 		alias lt='ls -lhTL1 --no-permissions --no-user'
- 		alias ltt='ls -lhTL2 --no-permissions --no-user'
+        alias ll='ls -lg'
+        alias la='ls -a'
+        alias lt='ls -lhTL1 --no-permissions --no-user'
+        alias ltt='ls -lhTL2 --no-permissions --no-user'
     else
         alias ls='ls --color=auto'
-		alias ll='ls -l'
-		alias la='ls -a'
-    	#alias l='ls -CF'
+        alias ll='ls -l'
+        alias la='ls -a'
+        #alias l='ls -CF'
     fi
 
     alias vi='vim'
@@ -96,13 +96,13 @@ if [ -x /usr/bin/dircolors ]; then
     alias ip='ip -color'
     alias soft-reboot='systemctl soft-reboot'
 
-	alias dotfiles='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+    alias dotfiles='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 
-	#alias hx='helix'
+    #alias hx='helix'
     #alias emacs='emacs -nw'
     #alias ls='ls --color=auto'
     #alias dir='dir --color=auto'

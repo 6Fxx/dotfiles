@@ -18,6 +18,11 @@ Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'preservim/vim-indent-guides'
 Plug 'joshdick/onedark.vim'
+" Plugin pour LSP
+Plug 'prabirshrestha/vim-lsp'          " client LSP
+Plug 'mattn/vim-lsp-settings'          " auto-install des serveurs LSP
+Plug 'prabirshrestha/asyncomplete.vim' " moteur d'autocomplétion async
+Plug 'prabirshrestha/asyncomplete-lsp.vim' " bridge LSP → asyncomplete
 
 call plug#end()
 " Required:
@@ -73,6 +78,39 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = '☰'
 let g:airline_symbols.maxlinenr = ''
 let g:airline_symbols.dirty = '⚡'
+
+" Activer la détection de filetype (obligatoire)
+filetype plugin on
+
+" Activer asyncomplete
+let g:asyncomplete_auto_popup = 1
+
+" Options vim-lsp
+let g:lsp_diagnostics_echo_cursor = 1   " affiche les erreurs en bas
+let g:lsp_inlay_hints_enabled = 1       " inlay hints si supporté
+let g:lsp_format_sync_timeout = 1000    " timeout format on save
+
+" Keymaps activés quand un serveur LSP est attaché au buffer
+function! s:on_lsp_buffer_enabled() abort
+  setlocal omnifunc=lsp#complete
+  setlocal signcolumn=yes
+  if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+
+  nmap <buffer> gd <plug>(lsp-definition)
+  nmap <buffer> gr <plug>(lsp-references)
+  nmap <buffer> K  <plug>(lsp-hover)
+  nmap <buffer> <leader>rn <plug>(lsp-rename)
+  nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+  nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+  nmap <buffer> <leader>ca <plug>(lsp-code-action)
+  " Format on save pour certains types de fichiers
+  autocmd! BufWritePre *.py,*.sh call execute('LspDocumentFormatSync')
+endfunction
+
+augroup lsp_install
+  au!
+  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
 
 "~~~~~~~~~~~~~~~~~~~~~~"
 " Plugins utiles
