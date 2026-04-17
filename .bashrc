@@ -96,7 +96,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias ip='ip -color'
     alias soft-reboot='systemctl soft-reboot'
 
-    alias dotfiles='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+    alias dotfiles='git --git-dir=$HOME/Git/dotfiles --work-tree=$HOME'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
