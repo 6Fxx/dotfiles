@@ -105,7 +105,8 @@ set ffs=unix,dos
 " Parametrage de l'indentation
 set tabstop=4       " Affiche les caractères tab comme 4 espaces
 set shiftwidth=4    " Indentation avec > utilise 4 espaces
-set expandtab
+set expandtab       " Remplace les tabs par des espaces à la frappe
+" :retab dans vim pour convertir les tabulations existantes
 set smartindent
 set autoindent
 filetype indent on
