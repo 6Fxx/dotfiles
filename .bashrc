@@ -90,13 +90,17 @@ if [ -x /usr/bin/dircolors ]; then
         alias la='ls -a'
         #alias l='ls -CF'
     fi
+    ### tmux
+    SESSION="6Fxx"
     # Config tmux si kyrat
     if [ -f "$KYRAT_HOME/tmux.conf" ]; then
-        alias tmux="tmux -f $KYRAT_HOME/tmux.conf"
-    fi
+        alias tmux="tmux new-session -A -s $SESSION -f $KYRAT_HOME/tmux.conf"
     # Config tmux si suroot
-    if [ -f "$TMUX_CONF_PATH" ]; then
-        alias tmux="tmux -f $TMUX_CONF_PATH"
+    elif [ -f "$TMUX_CONF_PATH" ]; then
+        alias tmux="tmux new-session -A -s $SESSION -f $TMUX_CONF_PATH"
+    # Config terminal normal
+    else
+        alias tmux="tmux new-session -A -s $SESSION"
     fi
 
     alias vi='vim'
@@ -104,7 +108,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias ip='ip -color'
     alias soft-reboot='systemctl soft-reboot'
 
-    alias dotfiles='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+    alias dotfiles='git --git-dir=$HOME/Git/dotfiles --work-tree=$HOME'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'

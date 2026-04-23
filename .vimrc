@@ -103,7 +103,9 @@ set encoding=utf-8
 set ffs=unix,dos
 
 " Parametrage de l'indentation
-set ts=4 sw=4
+set tabstop=4       " Affiche les caractères tab comme 4 espaces
+set shiftwidth=4    " Indentation avec > utilise 4 espaces
+set expandtab
 set smartindent
 set autoindent
 filetype indent on

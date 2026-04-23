@@ -8,6 +8,18 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   // Restauration de l'espace de travail
+  "project_panel": {
+    "dock": "left"
+  },
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "git_panel": {
+    "dock": "left"
+  },
   "agent_servers": {
     "opencode": {
       "type": "registry",
@@ -17,6 +29,7 @@
 
   // Modèle IA utilisé par l'agent Zed
   "agent": {
+    "dock": "right",
     "default_model": {
       "effort": "high",
       "provider": "zed.dev",
