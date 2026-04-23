@@ -91,6 +91,10 @@ if [ -x /usr/bin/dircolors ]; then
         #alias l='ls -CF'
     fi
 
+    if [ -f "$KYRAT_HOME/tmux.conf" ]; then¬
+        alias tmux="tmux -f $KYRAT_HOME/tmux.conf"
+    fi
+
     alias vi='vim'
     alias nano='nano -l'
     alias ip='ip -color'
