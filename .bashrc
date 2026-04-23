@@ -1,4 +1,4 @@
- #~/.bashrc
+#~/.bashrc
 
 # Cle API Perplexity
 #export PERPLEXITY_API_KEY=pplx-
@@ -90,9 +90,13 @@ if [ -x /usr/bin/dircolors ]; then
         alias la='ls -a'
         #alias l='ls -CF'
     fi
-
-    if [ -f "$KYRAT_HOME/tmux.conf" ]; then¬
+    # Config tmux si kyrat
+    if [ -f "$KYRAT_HOME/tmux.conf" ]; then
         alias tmux="tmux -f $KYRAT_HOME/tmux.conf"
+    fi
+    # Config tmux si suroot
+    if [ -f "$TMUX_CONF_PATH" ]; then
+        alias tmux="tmux -f $TMUX_CONF_PATH"
     fi
 
     alias vi='vim'
@@ -100,7 +104,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias ip='ip -color'
     alias soft-reboot='systemctl soft-reboot'
 
-    alias dotfiles='git --git-dir=$HOME/Git/dotfiles --work-tree=$HOME'
+    alias dotfiles='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
@@ -120,43 +124,51 @@ fi
 function suroot() {
     local tmpdir="/tmp/.suroot_$$"
     local src_dir
-    local bashrc_name vimrc_name
+    local bashrc_name vimrc_name tmuxconf_name
 
     if [[ -n "${KYRAT_HOME-}" && -f "${KYRAT_HOME}/bashrc" ]]; then
         # Session kyrat : fichiers sans le point
         src_dir="${KYRAT_HOME}"
         bashrc_name="bashrc"
         vimrc_name="vimrc"
+        tmuxconf_name="tmux.conf"
     elif [[ -n "${BASH_SOURCE[0]-}" && "${BASH_SOURCE[0]}" == /tmp/* ]]; then
         # Fallback autre outil similaire : on teste les deux formes
         src_dir="$(dirname "${BASH_SOURCE[0]}")"
         bashrc_name="$(basename "${BASH_SOURCE[0]}")"
-        vimrc_name="vimrc"  # à adapter si nécessaire
+        vimrc_name="vimrc"
+        tmuxconf_name="tmux.conf"  # à adapter si nécessaire
     else
         # Session locale classique : fichiers avec le point
         src_dir="${HOME}"
         bashrc_name=".bashrc"
         vimrc_name=".vimrc"
+        tmuxconf_name=".tmux.conf"
     fi
 
     local src_bashrc="${src_dir}/${bashrc_name}"
     local src_vimrc="${src_dir}/${vimrc_name}"
+    local src_tmuxconf="${src_dir}/${tmuxconf_name}"
 
     echo "[suroot] Dotfiles sourcés depuis : ${src_dir}"
-    echo "[suroot] bashrc : ${src_bashrc}"
-    echo "[suroot] vimrc  : ${src_vimrc}"
+    echo "[suroot] bashrc   : ${src_bashrc}"
+    echo "[suroot] vimrc    : ${src_vimrc}"
+    echo "[suroot] tmuxconf : ${src_tmuxconf}"
 
-    local b64_bashrc b64_vimrc
+    local b64_bashrc b64_vimrc b64_tmuxconf
     b64_bashrc=$(base64 -w0 "${src_bashrc}" 2>/dev/null || echo "")
     b64_vimrc=$(base64 -w0 "${src_vimrc}" 2>/dev/null || echo "")
+    b64_tmuxconf=$(base64 -w0 "${src_tmuxconf}" 2>/dev/null || echo "")
 
     su - root -s /bin/bash -c "
         mkdir -p ${tmpdir}
-        echo '${b64_bashrc}' | base64 -d > ${tmpdir}/.bashrc
-        echo '${b64_vimrc}'  | base64 -d > ${tmpdir}/.vimrc
+        echo '${b64_bashrc}'   | base64 -d > ${tmpdir}/.bashrc
+        echo '${b64_vimrc}'    | base64 -d > ${tmpdir}/.vimrc
+        echo '${b64_tmuxconf}' | base64 -d > ${tmpdir}/.tmux.conf
         export SUROOT_SESSION=1
         export SUROOT_DOTDIR=${tmpdir}
         export VIMINIT='source ${tmpdir}/.vimrc'
+        export TMUX_CONF_PATH=${tmpdir}/.tmux.conf
         bash --rcfile ${tmpdir}/.bashrc
         rm -rf ${tmpdir}
     "
