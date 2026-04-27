@@ -11,7 +11,12 @@ export LANG=fr_FR.UTF-8
 #export LANG=en_US.UTF-8
 
 # Definition du timeout
-export TMOUT=0
+#export TMOUT=0
+
+# Désactiver le timeout uniquement dans les sessions tmux
+if [ -n "${TMUX_PANE}" ]; then
+    TMOUT=0
+fi
 
 #Langue Systeme
 #LC_MESSAGES=en_US.UTF
