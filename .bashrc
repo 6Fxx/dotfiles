@@ -10,6 +10,9 @@ export TERM=xterm-256color
 export LANG=fr_FR.UTF-8
 #export LANG=en_US.UTF-8
 
+# Definition du timeout
+export TMOUT=0
+
 #Langue Systeme
 #LC_MESSAGES=en_US.UTF
 
