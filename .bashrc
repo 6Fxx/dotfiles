@@ -14,7 +14,7 @@ export LANG=fr_FR.UTF-8
 #export TMOUT=0
 
 # Désactiver le timeout uniquement dans les sessions tmux
-if [ -n "${TMUX_PANE}" ]; then
+if [ -n "${TMUX_PANE}" ] || [ "${SUROOT_SESSION}" = "tmux" ]; then
     TMOUT=0
 fi
 
@@ -22,7 +22,7 @@ fi
 #LC_MESSAGES=en_US.UTF
 
 # PATH
-export PATH=$PATH:/home/francis/Scripts:~/.local/share/kyrat/bin
+export PATH=$PATH:$HOME/Scripts:~/.local/share/kyrat/bin
 
 # Auto completion via sudo
 complete -cf sudo
@@ -30,15 +30,14 @@ complete -cf sudo
 # Definition de l'editeur
 export EDITOR=vim
 
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
 # Integration shell de fzf
 if command -v fzf >/dev/null 2>&1; then
     eval "$(fzf --bash)"
     export FZF_CTRL_T_COMMAND="find . -maxdepth 1 -mindepth 1"
 fi
-
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
-
 
 #### Debut Prompt ####
 
@@ -80,6 +79,10 @@ else
 fi
 unset color_prompt force_color_prompt
 
+if [ "$NEWLINE_BEFORE_PROMPT" = yes ]; then
+    PROMPT_COMMAND="PROMPT_COMMAND=echo"
+fi
+
 #### Fin Prompt ####
 
 # enable color support of ls and also add handy aliases
@@ -98,35 +101,49 @@ if [ -x /usr/bin/dircolors ]; then
         alias la='ls -a'
         #alias l='ls -CF'
     fi
-    ### tmux
-    SESSION="6Fxx"
-    # Config tmux si kyrat
-    if [ -f "$KYRAT_HOME/tmux.conf" ]; then
-        alias tmux="tmux new-session -A -s $SESSION -f $KYRAT_HOME/tmux.conf"
-    # Config tmux si suroot
-    elif [ -f "$TMUX_CONF_PATH" ]; then
-        alias tmux="tmux new-session -A -s $SESSION -f $TMUX_CONF_PATH"
-    # Config terminal normal
-    else
-        alias tmux="tmux new-session -A -s $SESSION"
-    fi
 
-    alias vi='vim'
-    alias nano='nano -l'
-    alias ip='ip -color'
-    alias soft-reboot='systemctl soft-reboot'
-
-    alias dotfiles='git --git-dir=$HOME/Git/dotfiles --work-tree=$HOME'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-
-    #alias hx='helix'
-    #alias emacs='emacs -nw'
     #alias ls='ls --color=auto'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
+fi
+
+alias vi='vim'
+alias nano='nano -l'
+
+alias ip='ip -color'
+alias soft-reboot='systemctl soft-reboot'
+
+alias dotfiles='git --git-dir=$HOME/Git/dotfiles --work-tree=$HOME'
+
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+#alias hx='helix'
+#alias emacs='emacs -nw'
+
+### tmux
+SESSION="6Fxx"
+# Config tmux si kyrat
+if [ -f "$KYRAT_HOME/tmux.conf" ]; then
+   	function tmuxInKyrat() {
+    	if [[ ! -f ~/.bashrc_before_tmux ]]; then
+    		cp ~/.bashrc ~/.bashrc_before_tmux
+    		cp -f $KYRAT_HOME/bashrc ~/.bashrc
+		else
+		    echo "bashrc_before_tmux existant, pas de configuration bashrc pour tmux."
+	    fi
+	tmux new-session -A -s $SESSION -f $KYRAT_HOME/tmux.conf
+	#alias tmux="tmux new-session -A -s $SESSION -f $KYRAT_HOME/tmux.conf -e "KYRAT_HOME=$KYRAT_HOME""
+	trap 'mv -f ~/.bashrc_before_tmux ~/.bashrc' EXIT SIGHUP
+   	}
+   	alias tmux=tmuxInKyrat
+# Config tmux si suroot
+elif [ -f "$TMUX_CONF_PATH" ]; then
+    alias tmux="tmux new-session -A -s $SESSION -f $TMUX_CONF_PATH"
+# Config terminal normal
+else
+    alias tmux="tmux new-session -A -s $SESSION"
 fi
 
 # colored GCC warnings and errors
@@ -172,12 +189,20 @@ function suroot() {
     b64_vimrc=$(base64 -w0 "${src_vimrc}" 2>/dev/null || echo "")
     b64_tmuxconf=$(base64 -w0 "${src_tmuxconf}" 2>/dev/null || echo "")
 
+    # Definition de SUROOT_SESSION pour la gestion du timeout dans les sessions tmux
+    local SUROOT_SESSION
+    if [ -n "${TMUX_PANE}" ]; then
+        SUROOT_SESSION="tmux"
+    else
+        SUROOT_SESSION=1
+    fi
+
     su - root -s /bin/bash -c "
         mkdir -p ${tmpdir}
         echo '${b64_bashrc}'   | base64 -d > ${tmpdir}/.bashrc
         echo '${b64_vimrc}'    | base64 -d > ${tmpdir}/.vimrc
         echo '${b64_tmuxconf}' | base64 -d > ${tmpdir}/.tmux.conf
-        export SUROOT_SESSION=1
+        export SUROOT_SESSION=${SUROOT_SESSION}
         export SUROOT_DOTDIR=${tmpdir}
         export VIMINIT='source ${tmpdir}/.vimrc'
         export TMUX_CONF_PATH=${tmpdir}/.tmux.conf
