@@ -14,7 +14,7 @@ export LANG=fr_FR.UTF-8
 #export TMOUT=0
 
 # Désactiver le timeout uniquement dans les sessions tmux
-if [ -n "${TMUX_PANE}" ]; then
+if [ -n "${TMUX_PANE}" ] || [ "${SUROOT_SESSION}" = "tmux" ]; then
     TMOUT=0
 fi
 
@@ -172,12 +172,20 @@ function suroot() {
     b64_vimrc=$(base64 -w0 "${src_vimrc}" 2>/dev/null || echo "")
     b64_tmuxconf=$(base64 -w0 "${src_tmuxconf}" 2>/dev/null || echo "")
 
+    # Definition de SUROOT_SESSION pour la gestion du timeout dans les sessions tmux
+    local SUROOT_SESSION
+    if [ -n "${TMUX_PANE}" ]; then
+        SUROOT_SESSION="tmux"
+    else
+        SUROOT_SESSION=1
+    fi
+
     su - root -s /bin/bash -c "
         mkdir -p ${tmpdir}
         echo '${b64_bashrc}'   | base64 -d > ${tmpdir}/.bashrc
         echo '${b64_vimrc}'    | base64 -d > ${tmpdir}/.vimrc
         echo '${b64_tmuxconf}' | base64 -d > ${tmpdir}/.tmux.conf
-        export SUROOT_SESSION=1
+        export SUROOT_SESSION=${SUROOT_SESSION}
         export SUROOT_DOTDIR=${tmpdir}
         export VIMINIT='source ${tmpdir}/.vimrc'
         export TMUX_CONF_PATH=${tmpdir}/.tmux.conf
