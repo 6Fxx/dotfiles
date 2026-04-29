@@ -126,21 +126,21 @@ alias egrep='egrep --color=auto'
 SESSION="6Fxx"
 # Config tmux si kyrat
 if [ -f "$KYRAT_HOME/tmux.conf" ]; then
-   	function tmuxInKyrat() {
-    	if [[ ! -f ~/.bashrc_before_tmux ]]; then
-    		cp ~/.bashrc ~/.bashrc_before_tmux
-    		cp -f $KYRAT_HOME/bashrc ~/.bashrc
-		else
-		    echo "bashrc_before_tmux existant, pas de configuration bashrc pour tmux."
-	    fi
-	tmux new-session -A -s $SESSION -f $KYRAT_HOME/tmux.conf
-	#alias tmux="tmux new-session -A -s $SESSION -f $KYRAT_HOME/tmux.conf -e "KYRAT_HOME=$KYRAT_HOME""
-	trap 'mv -f ~/.bashrc_before_tmux ~/.bashrc' EXIT SIGHUP
-   	}
-   	alias tmux=tmuxInKyrat
+    function tmuxInKyrat() {
+        if [[ ! -f ~/.bashrc_before_tmux ]]; then
+            cp ~/.bashrc ~/.bashrc_before_tmux
+            cp -f $KYRAT_HOME/bashrc ~/.bashrc
+        else
+            echo "bashrc_before_tmux existant, pas de configuration bashrc pour tmux."
+        fi
+        tmux -f $KYRAT_HOME/tmux.conf new-session -A -s $SESSION
+        #alias tmux="tmux -f $KYRAT_HOME/tmux.conf new-session -A -s $SESSION -e "KYRAT_HOME=$KYRAT_HOME""
+        trap 'mv -f ~/.bashrc_before_tmux ~/.bashrc' EXIT SIGHUP
+    }
+    alias tmux=tmuxInKyrat
 # Config tmux si suroot
 elif [ -f "$TMUX_CONF_PATH" ]; then
-    alias tmux="tmux new-session -A -s $SESSION -f $TMUX_CONF_PATH"
+    alias tmux="tmux -f $KYRAT_HOME/tmux.conf new-session -A -s $SESSION"
 # Config terminal normal
 else
     alias tmux="tmux new-session -A -s $SESSION"
