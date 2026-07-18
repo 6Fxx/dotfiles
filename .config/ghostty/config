@@ -70,7 +70,7 @@ window-height = 25
 ### Police ###
 
 # font-family = "JetBrains Mono"
-# font-family = "JetBrainsMono Nerd Font"
+font-family = "JetBrainsMono Nerd Font"
 # font-size = 13
 
 # Active les ligatures (ex: => devient une flèche)
